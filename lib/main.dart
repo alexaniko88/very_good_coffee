@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:very_good_coffee/di/di.dart';
 
 void main() {
+  configureDependencies();
   runApp(const MyApp());
 }
 
