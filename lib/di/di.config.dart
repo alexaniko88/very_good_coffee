@@ -47,6 +47,8 @@ extension GetItInjectableX on _i1.GetIt {
           coffeeMapper: gh<_i7.CoffeeMapper>(),
         ));
     gh.lazySingleton<_i7.RandomCoffeeMapper>(() => _i7.RandomCoffeeMapper());
+    gh.lazySingleton<_i5.CoffeeCubit>(
+        () => _i5.CoffeeCubit(repository: gh<_i5.CoffeeRepository>()));
     return this;
   }
 }

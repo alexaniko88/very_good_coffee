@@ -20,8 +20,8 @@ Coffee _$CoffeeFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Coffee {
-  String? get file => throw _privateConstructorUsedError;
-  bool? get isFavorite => throw _privateConstructorUsedError;
+  String get file => throw _privateConstructorUsedError;
+  bool get isFavorite => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -33,7 +33,7 @@ abstract class $CoffeeCopyWith<$Res> {
   factory $CoffeeCopyWith(Coffee value, $Res Function(Coffee) then) =
       _$CoffeeCopyWithImpl<$Res, Coffee>;
   @useResult
-  $Res call({String? file, bool? isFavorite});
+  $Res call({String file, bool isFavorite});
 }
 
 /// @nodoc
@@ -49,18 +49,18 @@ class _$CoffeeCopyWithImpl<$Res, $Val extends Coffee>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? file = freezed,
-    Object? isFavorite = freezed,
+    Object? file = null,
+    Object? isFavorite = null,
   }) {
     return _then(_value.copyWith(
-      file: freezed == file
+      file: null == file
           ? _value.file
           : file // ignore: cast_nullable_to_non_nullable
-              as String?,
-      isFavorite: freezed == isFavorite
+              as String,
+      isFavorite: null == isFavorite
           ? _value.isFavorite
           : isFavorite // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as bool,
     ) as $Val);
   }
 }
@@ -71,7 +71,7 @@ abstract class _$$_CoffeeCopyWith<$Res> implements $CoffeeCopyWith<$Res> {
       __$$_CoffeeCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? file, bool? isFavorite});
+  $Res call({String file, bool isFavorite});
 }
 
 /// @nodoc
@@ -84,18 +84,18 @@ class __$$_CoffeeCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? file = freezed,
-    Object? isFavorite = freezed,
+    Object? file = null,
+    Object? isFavorite = null,
   }) {
     return _then(_$_Coffee(
-      file: freezed == file
+      file: null == file
           ? _value.file
           : file // ignore: cast_nullable_to_non_nullable
-              as String?,
-      isFavorite: freezed == isFavorite
+              as String,
+      isFavorite: null == isFavorite
           ? _value.isFavorite
           : isFavorite // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as bool,
     ));
   }
 }
@@ -103,15 +103,15 @@ class __$$_CoffeeCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Coffee implements _Coffee {
-  const _$_Coffee({this.file, this.isFavorite});
+  const _$_Coffee({required this.file, required this.isFavorite});
 
   factory _$_Coffee.fromJson(Map<String, dynamic> json) =>
       _$$_CoffeeFromJson(json);
 
   @override
-  final String? file;
+  final String file;
   @override
-  final bool? isFavorite;
+  final bool isFavorite;
 
   @override
   String toString() {
@@ -147,15 +147,15 @@ class _$_Coffee implements _Coffee {
 }
 
 abstract class _Coffee implements Coffee {
-  const factory _Coffee({final String? file, final bool? isFavorite}) =
-      _$_Coffee;
+  const factory _Coffee(
+      {required final String file, required final bool isFavorite}) = _$_Coffee;
 
   factory _Coffee.fromJson(Map<String, dynamic> json) = _$_Coffee.fromJson;
 
   @override
-  String? get file;
+  String get file;
   @override
-  bool? get isFavorite;
+  bool get isFavorite;
   @override
   @JsonKey(ignore: true)
   _$$_CoffeeCopyWith<_$_Coffee> get copyWith =>
