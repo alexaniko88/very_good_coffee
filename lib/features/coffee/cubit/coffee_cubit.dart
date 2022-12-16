@@ -8,19 +8,59 @@ class CoffeeCubit extends Cubit<CoffeeState> {
 
   final CoffeeRepository repository;
 
-  Future<void> getCoffee() async {
-    _hideFavoriteIndicator();
+  Future<void> getRandomCoffee() async {
+    emit(HideFavoriteState(state));
     final result = await repository.getRandomCoffee();
     result.fold(
       onSuccess: (coffee) => emit(
         GetCoffeeSuccessState(
           imagePath: coffee.file,
+          filePath: state.filePath,
           isFavorite: coffee.isFavorite,
         ),
       ),
-      onFailure: (failure) => emit(GetCoffeeErrorState(failure: failure)),
+      onFailure: (failure) => emit(
+        GetCoffeeErrorState(
+          state,
+          failure: failure,
+        ),
+      ),
     );
   }
 
-  void _hideFavoriteIndicator() => emit(HideFavoriteState(state));
+  Future<void> getFavoriteCoffee() async {
+    emit(HideFavoriteState(state));
+    final result = await repository.getFavoriteCoffee();
+    result.fold(
+      onSuccess: (coffee) => emit(
+        GetCoffeeSuccessState(
+          imagePath: coffee.file,
+          filePath: coffee.isFavorite ? coffee.file : '',
+          isFavorite: coffee.isFavorite,
+        ),
+      ),
+      onFailure: (failure) => emit(
+        GetCoffeeErrorState(
+          state,
+          failure: failure,
+        ),
+      ),
+    );
+  }
+
+  Future<void> storeFavoriteCoffee() async {
+    final result = await repository.storeFavoriteCoffee(state.imagePath);
+    result.fold(
+      onSuccess: (path) => state.isFavorite
+          ? getFavoriteCoffee()
+          : emit(
+              StoreFavoriteSuccessState(
+                state: state,
+                imagePath: path,
+                filePath: path,
+              ),
+            ),
+      onFailure: (_) => emit(StoreFavoriteFailureState(state)),
+    );
+  }
 }

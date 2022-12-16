@@ -12,3 +12,7 @@ abstract class Failure<T> extends Equatable {
 class UnexpectedFailure extends Failure {
   const UnexpectedFailure(error) : super(error);
 }
+
+class FavoriteNotExistsFailure extends Failure {
+  const FavoriteNotExistsFailure() : super('');
+}

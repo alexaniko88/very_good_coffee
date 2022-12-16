@@ -1,28 +1,25 @@
-import 'dart:io';
-
-import 'package:http/http.dart';
-import 'package:injectable/injectable.dart';
+part of api;
 
 class _Constants{
   static const String baseURL = "https://coffee.alexflipnote.dev";
 }
 abstract class BaseApi {
-  final Client client;
+  final http.Client client;
 
   BaseApi({
     @factoryParam required this.client,
   });
 
-  Future<Response> get(String url) => client.get(
+  Future<http.Response> get(String url) => client.get(
         Uri.parse("${_Constants.baseURL}$url"),
         headers: {
           HttpHeaders.contentTypeHeader: 'application/json',
         },
-      );
+      ).timeout(const Duration(seconds: 1));
 }
 
 @module
 abstract class HttpClientModule {
   @lazySingleton
-  Client get httpClient => Client();
+  http.Client get httpClient => http.Client();
 }

@@ -1,8 +1,4 @@
-import 'dart:convert';
-
-import 'package:injectable/injectable.dart';
-import 'package:very_good_coffee/data/models/coffee/coffee_models.dart';
-import 'package:very_good_coffee/data/network/api/base.dart';
+part of api;
 
 @named
 @injectable
@@ -11,11 +7,23 @@ class CoffeeApi extends BaseApi {
 
   Future<CoffeeResponse> getRandomCoffee() {
     return get('/random.json').then(
-      (loginResult) {
-        if (loginResult.statusCode == 200) {
-          return CoffeeResponse.fromJson(json.decode(loginResult.body));
+      (result) {
+        if (result.statusCode == 200) {
+          return CoffeeResponse.fromJson(json.decode(result.body));
         } else {
-          throw json.decode(loginResult.body)["error"];
+          throw json.decode(result.body)["error"];
+        }
+      },
+    );
+  }
+
+  Future<http.Response> getSpecificCoffee(String coffeeName) {
+    return get("/$coffeeName").then(
+      (result) {
+        if (result.statusCode == 200) {
+          return result;
+        } else {
+          throw json.decode(result.body)["error"];
         }
       },
     );
