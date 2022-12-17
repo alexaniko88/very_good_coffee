@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of coffee;
 
@@ -14,16 +14,11 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Coffee _$CoffeeFromJson(Map<String, dynamic> json) {
-  return _Coffee.fromJson(json);
-}
-
 /// @nodoc
 mixin _$Coffee {
   String get file => throw _privateConstructorUsedError;
   bool get isFavorite => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $CoffeeCopyWith<Coffee> get copyWith => throw _privateConstructorUsedError;
 }
@@ -101,12 +96,9 @@ class __$$_CoffeeCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$_Coffee implements _Coffee {
   const _$_Coffee({required this.file, required this.isFavorite});
-
-  factory _$_Coffee.fromJson(Map<String, dynamic> json) =>
-      _$$_CoffeeFromJson(json);
 
   @override
   final String file;
@@ -128,7 +120,6 @@ class _$_Coffee implements _Coffee {
                 other.isFavorite == isFavorite));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, file, isFavorite);
 
@@ -137,20 +128,11 @@ class _$_Coffee implements _Coffee {
   @pragma('vm:prefer-inline')
   _$$_CoffeeCopyWith<_$_Coffee> get copyWith =>
       __$$_CoffeeCopyWithImpl<_$_Coffee>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_CoffeeToJson(
-      this,
-    );
-  }
 }
 
 abstract class _Coffee implements Coffee {
   const factory _Coffee(
       {required final String file, required final bool isFavorite}) = _$_Coffee;
-
-  factory _Coffee.fromJson(Map<String, dynamic> json) = _$_Coffee.fromJson;
 
   @override
   String get file;

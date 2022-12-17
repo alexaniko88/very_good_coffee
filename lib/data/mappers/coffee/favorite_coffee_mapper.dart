@@ -7,7 +7,4 @@ class FavoriteCoffeeMapper implements Mapper<CoffeeResponse, Coffee> {
         file: entity.file ?? '',
         isFavorite: true,
       );
-
-  @override
-  CoffeeResponse toEntity(Coffee model) => CoffeeResponse(file: model.file);
 }

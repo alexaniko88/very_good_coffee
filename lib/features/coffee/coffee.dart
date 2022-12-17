@@ -13,8 +13,6 @@ part 'entities/coffee.dart';
 
 part 'coffee.freezed.dart';
 
-part 'coffee.g.dart';
-
 part 'cubit/coffee_cubit.dart';
 
 part 'cubit/coffee_state.dart';

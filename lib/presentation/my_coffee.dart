@@ -1,6 +1,6 @@
 part of coffee;
 
-const double _imageRadius = 200;
+const double _imageRadius = 150;
 const double _messageMarginTop = 200;
 const double _errorIconSize = 300;
 
@@ -95,7 +95,7 @@ class _MyCoffeeState extends State<MyCoffee> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(50),
+                      padding: const EdgeInsets.only(top: 100),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [

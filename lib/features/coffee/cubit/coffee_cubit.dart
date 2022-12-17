@@ -52,7 +52,7 @@ class CoffeeCubit extends Cubit<CoffeeState> {
     final result = await repository.storeFavoriteCoffee(state.imagePath);
     result.fold(
       onSuccess: (path) => state.isFavorite
-          ? getFavoriteCoffee()
+          ? getRandomCoffee()
           : emit(
               StoreFavoriteSuccessState(
                 state: state,

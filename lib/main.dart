@@ -9,6 +9,7 @@ import 'package:very_good_coffee/presentation/coffee.dart';
 import 'package:very_good_coffee/presentation/common/restart_widget.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = SimpleBlocObserver();
   configureDependencies();
   runApp(const MyApp());

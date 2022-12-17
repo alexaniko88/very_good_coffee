@@ -7,7 +7,4 @@ class RandomCoffeeMapper implements Mapper<CoffeeResponse, Coffee> {
         file: entity.file ?? '',
         isFavorite: false,
       );
-
-  @override
-  CoffeeResponse toEntity(Coffee model) => CoffeeResponse(file: model.file);
 }

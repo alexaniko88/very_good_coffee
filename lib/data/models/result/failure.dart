@@ -16,3 +16,7 @@ class UnexpectedFailure extends Failure {
 class FavoriteNotExistsFailure extends Failure {
   const FavoriteNotExistsFailure() : super('');
 }
+
+class UnableToStoreFavoriteFailure extends Failure {
+  const UnableToStoreFavoriteFailure() : super('');
+}

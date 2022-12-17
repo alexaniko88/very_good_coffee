@@ -52,3 +52,7 @@ app.*.map.json
 /.env
 /*.env
 /*.env.*
+
+#coverage
+/packages/flutter/coverage/
+coverage/
