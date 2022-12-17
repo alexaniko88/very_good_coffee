@@ -8,14 +8,14 @@ class CoffeeCubit extends Cubit<CoffeeState> {
 
   final CoffeeRepository repository;
 
-  Future<void> getRandomCoffee() async {
+  Future<void> getRandomCoffee({bool removeFavorite = false}) async {
     emit(HideFavoriteState(state));
     final result = await repository.getRandomCoffee();
     result.fold(
       onSuccess: (coffee) => emit(
         GetCoffeeSuccessState(
           imagePath: coffee.file,
-          filePath: state.filePath,
+          filePath: removeFavorite ? '' : state.filePath,
           isFavorite: coffee.isFavorite,
         ),
       ),
@@ -52,7 +52,7 @@ class CoffeeCubit extends Cubit<CoffeeState> {
     final result = await repository.storeFavoriteCoffee(state.imagePath);
     result.fold(
       onSuccess: (path) => state.isFavorite
-          ? getRandomCoffee()
+          ? getRandomCoffee(removeFavorite: true)
           : emit(
               StoreFavoriteSuccessState(
                 state: state,

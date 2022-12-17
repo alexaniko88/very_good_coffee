@@ -13,7 +13,7 @@ class FileManager {
 
   Future<String> getFavorite() async {
     try {
-      return fileSource.getFavoritePath();
+      return await fileSource.getFavoritePath();
     } catch (_) {
       return '';
     }
