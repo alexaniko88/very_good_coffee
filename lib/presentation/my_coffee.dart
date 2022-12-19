@@ -2,7 +2,12 @@ part of coffee;
 
 const double _imageRadius = 150;
 const double _messageMarginTop = 200;
-const double _errorIconSize = 300;
+const double _errorIconSize = 200;
+
+enum ImageSource {
+  network,
+  file,
+}
 
 class MyCoffee extends StatefulWidget {
   const MyCoffee({super.key, required this.title});
@@ -39,81 +44,42 @@ class _MyCoffeeState extends State<MyCoffee> {
           builder: (context, state) {
             return TabBarView(
               children: [
-                Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(12),
-                      child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topCenter,
-                            child: ClipOval(
-                              child: SizedBox.fromSize(
-                                size: const Size.fromRadius(_imageRadius),
-                                child: !state.isFavorite &&
-                                        state.imagePath.isNotEmpty
-                                    ? Image.network(
-                                        state.imagePath,
-                                        fit: BoxFit.cover,
-                                        errorBuilder: (_, __, ___) =>
-                                            const Icon(
-                                          Icons.image,
-                                          size: _errorIconSize,
-                                        ),
-                                      )
-                                    : Image.file(
-                                        File(state.filePath),
-                                        fit: BoxFit.cover,
-                                        errorBuilder: (_, __, ___) =>
-                                            const Icon(
-                                          Icons.image,
-                                          size: _errorIconSize,
-                                        ),
-                                      ),
+                Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Stack(
+                    children: [
+                      Align(
+                        alignment: Alignment.topCenter,
+                        child: _CircleCoffee(
+                          imageSource:
+                              state.isFavorite
+                                  ? ImageSource.file
+                                  : ImageSource.network,
+                          imagePath: state.imagePath,
+                          filePath: state.filePath,
+                        ),
+                      ),
+                      Visibility(
+                        visible: state.isFavoriteVisible &&
+                            state.imagePath.isNotEmpty,
+                        child: Positioned(
+                          right: 20,
+                          top: 20,
+                          child: CircleAvatar(
+                            child: IconButton(
+                              onPressed: () =>
+                                  getIt<CoffeeCubit>().storeFavoriteCoffee(),
+                              icon: Icon(
+                                state.isFavorite
+                                    ? Icons.favorite
+                                    : Icons.favorite_outline,
                               ),
                             ),
                           ),
-                          Visibility(
-                            visible: state.isFavoriteVisible,
-                            child: Positioned(
-                              right: 20,
-                              top: 20,
-                              child: CircleAvatar(
-                                child: IconButton(
-                                  onPressed: () => getIt<CoffeeCubit>()
-                                      .storeFavoriteCoffee(),
-                                  icon: Icon(
-                                    state.isFavorite
-                                        ? Icons.favorite
-                                        : Icons.favorite_outline,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 100),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          FloatingActionButton.large(
-                            onPressed: () => RestartWidget.restartApp(context),
-                            tooltip: 'Reload',
-                            child: const Icon(Icons.restart_alt),
-                          ),
-                          FloatingActionButton.large(
-                            onPressed: () =>
-                                getIt<CoffeeCubit>().getRandomCoffee(),
-                            tooltip: 'Next',
-                            child: const Icon(Icons.skip_next_outlined),
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 Visibility(
                   visible: state.filePath.isNotEmpty,
@@ -128,18 +94,10 @@ class _MyCoffeeState extends State<MyCoffee> {
                     padding: const EdgeInsets.all(12),
                     child: Align(
                       alignment: Alignment.topCenter,
-                      child: ClipOval(
-                        child: SizedBox.fromSize(
-                          size: const Size.fromRadius(_imageRadius),
-                          child: Image.file(
-                            File(state.filePath),
-                            fit: BoxFit.cover,
-                            errorBuilder: (context, error, trace) => const Icon(
-                              Icons.image,
-                              size: _errorIconSize,
-                            ),
-                          ),
-                        ),
+                      child: _CircleCoffee(
+                        imageSource: ImageSource.file,
+                        filePath: state.filePath,
+                        imagePath: state.imagePath,
                       ),
                     ),
                   ),
@@ -148,7 +106,75 @@ class _MyCoffeeState extends State<MyCoffee> {
             );
           },
         ),
+        floatingActionButton: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            FloatingActionButton.large(
+              onPressed: () => RestartWidget.restartApp(context),
+              tooltip: 'Reload',
+              child: const Icon(Icons.restart_alt),
+            ),
+            const SizedBox(height: 12),
+            FloatingActionButton.large(
+              onPressed: () => getIt<CoffeeCubit>().getRandomCoffee(),
+              tooltip: 'Next',
+              child: const Icon(Icons.skip_next_outlined),
+            )
+          ],
+        ),
       ),
+    );
+  }
+}
+
+class _CircleCoffee extends StatelessWidget {
+  const _CircleCoffee({
+    Key? key,
+    required this.imageSource,
+    required this.imagePath,
+    required this.filePath,
+  }) : super(key: key);
+
+  final ImageSource imageSource;
+  final String imagePath;
+  final String filePath;
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipOval(
+      child: SizedBox.fromSize(
+        size: const Size.fromRadius(_imageRadius),
+        child: _buildBySource(),
+      ),
+    );
+  }
+
+  Widget _buildBySource() {
+    switch (imageSource) {
+      case ImageSource.network:
+        return imagePath.isNotEmpty
+            ? Image.network(
+                imagePath,
+                fit: BoxFit.cover,
+                errorBuilder: (_, __, ___) => _buildErrorIcon(),
+              )
+            : _buildErrorIcon();
+      case ImageSource.file:
+        return filePath.isNotEmpty
+            ? Image.file(
+                File(filePath),
+                fit: BoxFit.cover,
+                errorBuilder: (_, __, ___) => _buildErrorIcon(),
+              )
+            : _buildErrorIcon();
+    }
+  }
+
+  Icon _buildErrorIcon() {
+    return const Icon(
+      Icons.image,
+      size: _errorIconSize,
     );
   }
 }
