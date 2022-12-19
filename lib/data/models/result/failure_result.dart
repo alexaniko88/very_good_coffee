@@ -1,4 +1,4 @@
-part of result;
+part of models;
 
 class FailureResult<S, F extends Failure> extends Result<S, F> {
   FailureResult(this._value);

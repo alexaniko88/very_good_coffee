@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:very_good_coffee/data/models/result/result.dart';
+import 'package:very_good_coffee/data/models/models.dart';
 import 'package:very_good_coffee/di/di.dart';
 import 'package:very_good_coffee/features/coffee/coffee.dart';
-import 'package:very_good_coffee/presentation/coffee.dart';
+import 'package:very_good_coffee/presentation/coffee/coffee.dart';
 
 import '../widget_tests_helper.dart';
 

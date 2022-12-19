@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:very_good_coffee/di/di.dart';
 import 'package:very_good_coffee/observers/simple_bloc_observer.dart';
-import 'package:very_good_coffee/presentation/coffee.dart';
+import 'package:very_good_coffee/presentation/coffee/coffee.dart';
 import 'package:very_good_coffee/presentation/common/restart_widget.dart';
 
 void main() {

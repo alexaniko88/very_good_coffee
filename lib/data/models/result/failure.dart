@@ -1,4 +1,4 @@
-part of result;
+part of models;
 
 abstract class Failure<T> extends Equatable {
   const Failure(this.error);

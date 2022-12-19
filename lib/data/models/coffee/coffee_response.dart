@@ -1,4 +1,4 @@
-part of coffee_models;
+part of models;
 
 @freezed
 class CoffeeResponse with _$CoffeeResponse {

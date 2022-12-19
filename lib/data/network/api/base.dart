@@ -1,4 +1,4 @@
-part of api;
+part of network;
 
 typedef FromJsonParser<T> = T Function(Map<String, dynamic> json);
 

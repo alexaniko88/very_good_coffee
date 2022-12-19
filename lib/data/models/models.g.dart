@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of coffee_models;
+part of models;
 
 // **************************************************************************
 // JsonSerializableGenerator

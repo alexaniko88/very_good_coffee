@@ -1,4 +1,4 @@
-part of result;
+part of models;
 
 abstract class Result<S, F extends Failure> {
   R fold<R>({

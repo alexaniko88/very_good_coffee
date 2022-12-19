@@ -1,4 +1,4 @@
-part of coffee_mappers;
+part of mappers;
 
 @LazySingleton()
 class RandomCoffeeMapper implements Mapper<CoffeeResponse, Coffee> {

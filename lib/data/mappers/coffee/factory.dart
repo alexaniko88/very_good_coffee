@@ -1,4 +1,4 @@
-part of coffee_mappers;
+part of mappers;
 
 abstract class CoffeeMapper {
   Mapper<CoffeeResponse, Coffee> get coffee;
