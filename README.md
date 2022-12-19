@@ -1,4 +1,4 @@
-# very_good_coffee
+# VERY GOOD COFFEE
 A simple app where you can see the random coffee image each time the app is being reloaded or the next button is being pressed.
 Basically you can see two buttons the screen, first to force app reload and the second for get the next random coffee image.
 Also, whenever user likes, the coffee image can be stored locally as a favorite coffee. This favorite coffee is accessible 
